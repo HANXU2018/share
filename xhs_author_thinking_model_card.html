@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>作者思考模型拆解卡片</title>
+  <style>
+    :root {
+      --bg: #f5f8ff;
+      --bg2: #eef4ff;
+      --card: rgba(255,255,255,0.92);
+      --text: #172033;
+      --sub: #5b6780;
+      --blue: #4f7cff;
+      --blue2: #7aa2ff;
+      --red: #ff5f7a;
+      --gold: #ffb648;
+      --line: rgba(89,118,196,0.14);
+      --shadow: 0 18px 50px rgba(71, 103, 182, 0.12);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #ffffff 0%, #eef4ff 28%, #f5f8ff 58%, #eef3ff 100%);
+      line-height: 1.65;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px 70px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(240,246,255,0.95));
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+      border-radius: 36px;
+      padding: 34px 30px 28px;
+      margin-bottom: 20px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(8px);
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: 240px;
+      height: 240px;
+      right: -70px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(79,124,255,0.18), rgba(79,124,255,0));
+    }
+
+    .hero::after {
+      width: 200px;
+      height: 200px;
+      left: -60px;
+      bottom: -90px;
+      background: radial-gradient(circle, rgba(255,95,122,0.12), rgba(255,95,122,0));
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(79,124,255,0.1);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+      border: 1px solid rgba(79,124,255,0.12);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 40px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--sub);
+      margin: 0 0 18px;
+      max-width: 820px;
+    }
+
+    .summary-box {
+      background: linear-gradient(135deg, rgba(79,124,255,0.08), rgba(255,255,255,0.8));
+      border: 1px solid rgba(79,124,255,0.12);
+      border-radius: 24px;
+      padding: 18px 18px 16px;
+    }
+
+    .summary-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--blue);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .summary-main {
+      font-size: 25px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .highlight-blue { color: var(--blue); }
+    .highlight-red { color: var(--red); }
+    .highlight-gold { color: #d88900; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.75);
+      padding: 24px 22px;
+      backdrop-filter: blur(12px);
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-7 { grid-column: span 7; }
+    .span-6 { grid-column: span 6; }
+    .span-5 { grid-column: span 5; }
+    .span-4 { grid-column: span 4; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--blue);
+      background: rgba(79,124,255,0.09);
+      border: 1px solid rgba(79,124,255,0.12);
+      padding: 7px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 900;
+      margin: 0 0 14px;
+      letter-spacing: -0.3px;
+    }
+
+    .section-desc {
+      color: var(--sub);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .bullet {
+      padding: 16px 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(244,248,255,0.96), rgba(255,255,255,0.96));
+      border: 1px solid var(--line);
+    }
+
+    .bullet strong {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .mini {
+      padding: 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(250,252,255,1), rgba(245,248,255,0.92));
+      border: 1px solid var(--line);
+      min-height: 140px;
+    }
+
+    .mini h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .mini p {
+      margin: 0;
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    .formula {
+      margin-top: 10px;
+      padding: 18px 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(79,124,255,0.12), rgba(255,255,255,0.92));
+      border: 1px solid rgba(79,124,255,0.14);
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .quote {
+      padding: 18px 18px;
+      border-left: 5px solid var(--blue);
+      background: rgba(79,124,255,0.08);
+      border-radius: 18px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #294892;
+    }
+
+    .flow {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 15px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+    }
+
+    .num {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      box-shadow: 0 8px 20px rgba(79,124,255,0.22);
+      font-size: 15px;
+    }
+
+    .flow-step strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .flow-step p {
+      margin: 0;
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    .footer-box {
+      margin-top: 24px;
+      padding: 22px 20px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #ffffff, #edf4ff);
+      border: 1px solid rgba(79,124,255,0.12);
+      box-shadow: var(--shadow);
+    }
+
+    .footer-box h2 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.25;
+    }
+
+    .footer-box p {
+      margin: 0;
+      color: var(--sub);
+      font-size: 16px;
+    }
+
+    .cover-note {
+      margin-top: 16px;
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255,95,122,0.09);
+      color: var(--red);
+      font-weight: 800;
+      font-size: 13px;
+      border: 1px solid rgba(255,95,122,0.12);
+    }
+
+    @media (max-width: 820px) {
+      .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; }
+      h1 { font-size: 32px; }
+      .summary-main { font-size: 22px; }
+      .section-title { font-size: 24px; }
+      .formula { font-size: 22px; }
+      .mini-grid { grid-template-columns: 1fr; }
+      .page { padding: 16px 14px 50px; }
+      .hero { padding: 24px 20px; border-radius: 28px; }
+      .card { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="pill-row">
+        <span class="pill">小红书风格</span>
+        <span class="pill">思维模型拆解</span>
+        <span class="pill">适合截图分享</span>
+      </div>
+      <h1>博主最近 20 篇付费文章<br>背后的<span class="highlight-blue">思考模型</span>与<span class="highlight-red">底层逻辑</span></h1>
+      <p class="lead">把分散观点压缩成一套可复用的思维框架：他如何看时代、看财富、看教育、看就业、看个人选择，以及这套框架为什么会让人感觉“有洞察力”。</p>
+
+      <div class="summary-box">
+        <div class="summary-title">一句话抓住核心</div>
+        <div class="summary-main">
+          这位作者的底层框架是：<span class="highlight-blue">先判断时代阶段</span>，再看<span class="highlight-red">生产力 / 分配 / 债务 / 规则</span>的错配，接着识别<span class="highlight-gold">谁掌握资源、位置与叙事权</span>，最后把结论压到个人的职业、投资与行动选择上。
+        </div>
+      </div>
+      <div class="cover-note">适合做分享封面的一页：高密度、强结构、关键句加粗高亮</div>
+    </section>
+
+    <section class="grid">
+      <div class="card span-7">
+        <div class="section-tag">01｜作者最核心的世界观</div>
+        <h2 class="section-title">世界不是靠表面现象运转，<br>而是靠<span class="highlight-blue">阶段变化</span>与<span class="highlight-red">结构力量</span>运转</h2>
+        <div class="bullet-list">
+          <div class="bullet">
+            <strong>① 时代先变，人的命运后变</strong>
+            <div>作者习惯先问：现在处在哪个阶段？生产力到了哪一层？旧规则是不是已经失效？他很少直接讨论“某个技巧”，更喜欢先谈大结构。</div>
+          </div>
+          <div class="bullet">
+            <strong>② 财富从“劳动主导”走向“需求主导”</strong>
+            <div>当整体生产力越来越强，重复劳动的价值被压缩，需求组织、流量分发、资源配置、叙事能力的权重持续提升。</div>
+          </div>
+          <div class="bullet">
+            <strong>③ 个人输赢高度依赖位置</strong>
+            <div>作者反复强调：同样努力，放在不同环境、不同赛道、不同层级，回报差很多。选择位置，本身就是决策力。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card span-5">
+        <div class="section-tag">02｜他最常用的分析顺序</div>
+        <h2 class="section-title">固定推演路径</h2>
+        <div class="flow">
+          <div class="flow-step"><div class="num">1</div><div><strong>先拆概念</strong><p>把“教育、机会、中产、投资、努力”重新定义。</p></div></div>
+          <div class="flow-step"><div class="num">2</div><div><strong>找阶段变化</strong><p>判断今天和过去到底哪里不一样。</p></div></div>
+          <div class="flow-step"><div class="num">3</div><div><strong>找主要矛盾</strong><p>在多重现象中抓真正驱动结果的核心变量。</p></div></div>
+          <div class="flow-step"><div class="num">4</div><div><strong>识别利益结构</strong><p>看谁拿走蛋糕、谁承担代价、谁能定义规则。</p></div></div>
+          <div class="flow-step"><div class="num">5</div><div><strong>落到个人动作</strong><p>职业怎么选、钱怎么配、能力怎么练、风险怎么躲。</p></div></div>
+        </div>
+      </div>
+
+      <div class="card span-12">
+        <div class="section-tag">03｜作者反复出现的 8 个底层判断</div>
+        <h2 class="section-title">这 8 条，几乎构成了他的整套思维引擎</h2>
+        <div class="mini-grid">
+          <div class="mini"><h3>1. 生产力决定社会形态</h3><p>教育、职业、消费、就业、安全感，最终都要回到生产力变化上理解。</p></div>
+          <div class="mini"><h3>2. 分配与债务决定很多人的命运</h3><p>消费能力不足时，系统会靠分配调整、债务扩张、叙事刺激来延续循环。</p></div>
+          <div class="mini"><h3>3. 财富高度依赖信息不对称</h3><p>待在西瓜上掉一块皮，往往都比芝麻地里整颗成果更大。</p></div>
+          <div class="mini"><h3>4. 教育更多是在做场景化筛选</h3><p>学校擅长筛记忆力和推理力，社会更奖赏探索力、适应力、系统力。</p></div>
+          <div class="mini"><h3>5. 人更相信故事，不只相信事实</h3><p>叙事决定情绪，情绪影响消费、投资、就业和群体行为。</p></div>
+          <div class="mini"><h3>6. 规则感比勤奋更稀缺</h3><p>只在局部样本里努力，容易成为“感恩节火鸡”。长周期认知更重要。</p></div>
+          <div class="mini"><h3>7. 好系统优先于单次赌对</h3><p>交易、职业、创业，本质都在于是否建立规则、止损、反馈和复盘系统。</p></div>
+          <div class="mini"><h3>8. 最终目标是掌控权</h3><p>作者讲自律、清醒、拎得清，核心都指向一个词：重新拿回人生主动权。</p></div>
+        </div>
+      </div>
+
+      <div class="card span-6">
+        <div class="section-tag">04｜他怎么看“教育”</div>
+        <h2 class="section-title">学校体系培养的是<br><span class="highlight-blue">可被筛选的人</span></h2>
+        <div class="bullet-list">
+          <div class="bullet">
+            <strong>学校更像标准化选拔器</strong>
+            <div>它擅长在特定场景下筛出记忆力强、推理力强、服从流程的人。</div>
+          </div>
+          <div class="bullet">
+            <strong>社会更奖励另外几种能力</strong>
+            <div>探索力、适应力、对环境的理解力、把经验抽象为方法的系统能力。</div>
+          </div>
+          <div class="bullet">
+            <strong>所以很多人会出现错配感</strong>
+            <div>读书多年，进入社会后却发现：会考试和会生存、会赚钱、会判断，并不是同一回事。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card span-6">
+        <div class="section-tag">05｜他怎么看“努力”</div>
+        <h2 class="section-title">努力有价值，<br>但要放进<span class="highlight-red">正确环境</span>里</h2>
+        <div class="quote">井底的努力，收益很薄；看见井外世界后的针对性努力，才有跃迁价值。</div>
+        <div class="bullet-list" style="margin-top:14px;">
+          <div class="bullet"><strong>作者真正反对的不是努力</strong><div>他反对的是对环境、周期、规则、资源分布毫无判断的盲目使劲。</div></div>
+          <div class="bullet"><strong>努力之前先认识世界</strong><div>看清自己在哪张牌桌、谁在定规则、哪些位置值得争，努力才会放大回报。</div></div>
+        </div>
+      </div>
+
+      <div class="card span-8">
+        <div class="section-tag">06｜他怎么看“个人逆袭”</div>
+        <h2 class="section-title">逆袭在他这里，几乎总是这条路径</h2>
+        <div class="flow">
+          <div class="flow-step"><div class="num">A</div><div><strong>先拎得清</strong><p>看透自己处在什么位置，别被虚名和局部幻觉带着走。</p></div></div>
+          <div class="flow-step"><div class="num">B</div><div><strong>研究已经成功的人</strong><p>研究规则样本，研究标准卷，研究真正做到过的人。</p></div></div>
+          <div class="flow-step"><div class="num">C</div><div><strong>做你懂的事</strong><p>进入自己能建立理解深度和判断优势的领域。</p></div></div>
+          <div class="flow-step"><div class="num">D</div><div><strong>建立规则与回溯</strong><p>让决策具备复盘性、可复制性、容错性。</p></div></div>
+          <div class="flow-step"><div class="num">E</div><div><strong>在混乱中寻找阶梯</strong><p>周期转换期，普通人有机会通过准备度拉开差距。</p></div></div>
+        </div>
+      </div>
+
+      <div class="card span-4">
+        <div class="section-tag">07｜他最重视的个人品质</div>
+        <h2 class="section-title">不是“聪明”两个字</h2>
+        <div class="bullet-list">
+          <div class="bullet"><strong>调查能力</strong><div>先收集事实，再发言。</div></div>
+          <div class="bullet"><strong>抓主矛盾能力</strong><div>在噪音里抓真正的核心问题。</div></div>
+          <div class="bullet"><strong>系统能力</strong><div>把碎片经验变成规则和方法。</div></div>
+          <div class="bullet"><strong>自律能力</strong><div>稳定执行，让掌控权回到自己手里。</div></div>
+        </div>
+      </div>
+
+      <div class="card span-12">
+        <div class="section-tag">08｜把他的框架压成一条公式</div>
+        <h2 class="section-title">一张公式图，快速记住整套逻辑</h2>
+        <div class="formula">
+          个人回报 ＝ <span class="highlight-blue">时代阶段</span>
+          × <span class="highlight-red">位置高低</span>
+          × <span class="highlight-gold">信息含量</span>
+          × <span class="highlight-blue">系统能力</span>
+          × <span class="highlight-red">自律程度</span>
+        </div>
+        <div class="mini-grid" style="margin-top:16px;">
+          <div class="mini"><h3>时代阶段</h3><p>旧红利结束了没有？新规则开始兑现了没有？这是起点。</p></div>
+          <div class="mini"><h3>位置高低</h3><p>你在增量区还是存量区，在高地还是洼地，在牌桌上还是桌外。</p></div>
+          <div class="mini"><h3>信息含量</h3><p>知道什么比知道怎么做更重要，方向错误时，执行越努力损耗越大。</p></div>
+          <div class="mini"><h3>系统能力 + 自律</h3><p>看懂一次不难，持续做对很难。真正的差距在长期执行与反馈修正。</p></div>
+        </div>
+      </div>
+
+      <div class="card span-6">
+        <div class="section-tag">09｜这套框架为什么吸引人</div>
+        <h2 class="section-title">它提供了三种强烈价值感</h2>
+        <div class="bullet-list">
+          <div class="bullet"><strong>解释力</strong><div>很多零散现象，被统一放进同一个大框架里，读者会有“突然看懂”的感觉。</div></div>
+          <div class="bullet"><strong>方向感</strong><div>它把焦虑压缩成路径：看时代、看位置、看能力、看动作。</div></div>
+          <div class="bullet"><strong>掌控感</strong><div>哪怕外部环境很乱，依然能提炼出“我现在可以做什么”。</div></div>
+        </div>
+      </div>
+
+      <div class="card span-6">
+        <div class="section-tag">10｜这套框架的适用边界</div>
+        <h2 class="section-title">读的时候，保持两层清醒</h2>
+        <div class="bullet-list">
+          <div class="bullet"><strong>它非常强于“结构判断”</strong><div>适合拿来理解周期、职业焦虑、财富分层、教育错配、个人策略。</div></div>
+          <div class="bullet"><strong>它偏宏观、偏战略、偏现实主义</strong><div>情绪价值很强，方向启发很强，微观数据验证和精密实证要读者自己补充。</div></div>
+          <div class="bullet"><strong>它更像决策框架</strong><div>重点在帮助你建立判断方式，而不是替你完成每一个具体选择。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-box">
+      <h2>你可以这样记住这位作者</h2>
+      <p>
+        他本质上是在反复做同一件事：<strong>用生产力与分配的框架解释时代</strong>，用<strong>信息、位置与规则的框架解释财富</strong>，用<strong>探索力、系统力与自律</strong>解释个人出路。<br><br>
+        所以，他看上去像在讲经济、讲教育、讲投资、讲职场，真正稳定的一条主线始终是：<strong>人在剧烈变化的时代里，如何保持清醒，如何选择更高回报的位置，如何建立能穿越周期的个人系统。</strong>
+      </p>
+    </section>
+  </div>
+</body>
+</html>
