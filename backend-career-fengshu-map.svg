@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 560" width="1080" height="560">
+  <style>
+    text {
+      font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      fill: #111827;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .subtitle {
+      font-size: 13px;
+      fill: #6b7280;
+    }
+    .lane-title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .lane-meta {
+      font-size: 12px;
+      fill: #475467;
+    }
+    .node-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .node-body {
+      font-size: 12px;
+      fill: #475467;
+    }
+    .small {
+      font-size: 11px;
+      fill: #6b7280;
+    }
+    .legend {
+      font-size: 12px;
+      fill: #475467;
+    }
+  </style>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <rect width="1080" height="560" fill="#ffffff"/>
+
+  <text x="40" y="44" class="title">风叔视角下的后端职业路径</text>
+  <text x="40" y="68" class="subtitle">主线不是“写更多代码”，而是“用技术切入核心系统，再把结果沉淀成选择权与资产”。</text>
+
+  <rect x="40" y="96" width="300" height="272" rx="14" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="62" y="126" class="lane-title">入口期</text>
+  <text x="62" y="146" class="lane-meta">0-3 年｜先进入核心后端链路，而不是长期停在低价值维护岗</text>
+
+  <rect x="62" y="168" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="80" y="192" class="node-title">靠近核心岗位</text>
+  <text x="80" y="210" class="node-body">交易 / 支付 / 风控 / 数据 / 稳定性 / 基础设施</text>
+
+  <rect x="62" y="236" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="80" y="260" class="node-title">守住一个服务</text>
+  <text x="80" y="278" class="node-body">DB、Cache、MQ、Linux、发布、监控、排障</text>
+
+  <rect x="62" y="304" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="80" y="328" class="node-title">拿复杂问题</text>
+  <text x="80" y="346" class="node-body">一致性、性能、事故治理、容量、降本</text>
+
+  <rect x="390" y="96" width="300" height="272" rx="14" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="412" y="126" class="lane-title">跃迁期</text>
+  <text x="412" y="146" class="lane-meta">3-8 年｜从“交代码的人”升级成“交结果、交判断、交可预期性的人”</text>
+
+  <rect x="412" y="168" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="430" y="192" class="node-title">成为服务 Owner</text>
+  <text x="430" y="210" class="node-body">模块负责人 / 服务负责人 / 核心骨干</text>
+
+  <rect x="412" y="236" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="430" y="260" class="node-title">代码之外的过程信息</text>
+  <text x="430" y="278" class="node-body">风险、依赖、资源缺口、节奏、取舍、预期</text>
+
+  <rect x="412" y="304" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="430" y="328" class="node-title">让市场认你的结果</text>
+  <text x="430" y="346" class="node-body">业务收益、损失规避、成本优化，比技术资历更值钱</text>
+
+  <rect x="740" y="96" width="300" height="272" rx="14" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="762" y="126" class="lane-title">资产期</text>
+  <text x="762" y="146" class="lane-meta">8 年以后｜把岗位价值逐步沉淀成个人资产、部分所有权与第二曲线</text>
+
+  <rect x="762" y="168" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="780" y="192" class="node-title">构建个人资产</text>
+  <text x="780" y="210" class="node-body">现金储备、投资习惯、方法库、内容、开源、行业关系</text>
+
+  <rect x="762" y="236" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="780" y="260" class="node-title">争取部分所有权</text>
+  <text x="780" y="278" class="node-body">分红、股权、利润分配、真正的合伙人机会</text>
+
+  <rect x="762" y="304" width="256" height="54" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="780" y="328" class="node-title">第二曲线</text>
+  <text x="780" y="346" class="node-body">咨询、工具、SaaS、副产品、独立业务、行业顾问</text>
+
+  <path d="M318 195 L412 195" stroke="#2563eb" stroke-width="2.2" fill="none" marker-end="url(#arrow-blue)"/>
+  <rect x="334" y="180" width="64" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="366" y="194" text-anchor="middle" class="small">位置升级</text>
+
+  <path d="M318 263 L412 263" stroke="#2563eb" stroke-width="2.2" fill="none" marker-end="url(#arrow-blue)"/>
+  <rect x="332" y="248" width="68" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="366" y="262" text-anchor="middle" class="small">视角升级</text>
+
+  <path d="M318 331 L412 331" stroke="#2563eb" stroke-width="2.2" fill="none" marker-end="url(#arrow-blue)"/>
+  <rect x="326" y="316" width="80" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="366" y="330" text-anchor="middle" class="small">价值被识别</text>
+
+  <path d="M668 195 L762 195" stroke="#16a34a" stroke-width="2.2" fill="none" marker-end="url(#arrow-green)"/>
+  <rect x="682" y="180" width="66" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="715" y="194" text-anchor="middle" class="small">沉淀资产</text>
+
+  <path d="M668 263 L762 263" stroke="#16a34a" stroke-width="2.2" fill="none" marker-end="url(#arrow-green)"/>
+  <rect x="679" y="248" width="72" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="715" y="262" text-anchor="middle" class="small">绑定利益</text>
+
+  <path d="M668 331 L762 331" stroke="#16a34a" stroke-width="2.2" fill="none" marker-end="url(#arrow-green)"/>
+  <rect x="683" y="316" width="64" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="715" y="330" text-anchor="middle" class="small">开第二线</text>
+
+  <rect x="40" y="402" width="760" height="118" rx="14" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+  <text x="62" y="430" class="lane-title" style="font-size:18px;">长期停留在这里，风险会累积</text>
+  <text x="62" y="450" class="lane-meta">这些不是短期问题，而是会把后端路径慢慢做窄的反模式。</text>
+
+  <rect x="62" y="466" width="130" height="38" rx="9" fill="#ffffff" stroke="#fecaca" stroke-width="1.3"/>
+  <text x="127" y="489" text-anchor="middle" class="node-body" style="font-weight:600;">只做 CRUD</text>
+
+  <rect x="206" y="466" width="130" height="38" rx="9" fill="#ffffff" stroke="#fecaca" stroke-width="1.3"/>
+  <text x="271" y="489" text-anchor="middle" class="node-body" style="font-weight:600;">旧栈资历崇拜</text>
+
+  <rect x="350" y="466" width="130" height="38" rx="9" fill="#ffffff" stroke="#fecaca" stroke-width="1.3"/>
+  <text x="415" y="489" text-anchor="middle" class="node-body" style="font-weight:600;">只做事不汇报</text>
+
+  <rect x="494" y="466" width="130" height="38" rx="9" fill="#ffffff" stroke="#fecaca" stroke-width="1.3"/>
+  <text x="559" y="489" text-anchor="middle" class="node-body" style="font-weight:600;">单平台绑定</text>
+
+  <rect x="638" y="466" width="140" height="38" rx="9" fill="#ffffff" stroke="#fecaca" stroke-width="1.3"/>
+  <text x="708" y="489" text-anchor="middle" class="node-body" style="font-weight:600;">纯人力比价</text>
+
+  <path d="M800 460 C860 460 890 460 930 460 L930 456" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="6,4" marker-end="url(#arrow-red)"/>
+  <rect x="852" y="402" width="188" height="118" rx="14" fill="#7f1d1d" stroke="#991b1b" stroke-width="1.5"/>
+  <text x="874" y="432" fill="#ffffff" class="lane-title" style="font-size:18px;">被动挨打</text>
+  <text x="874" y="456" fill="#fecaca" class="node-body">性价比下降、被 AI 与更低价人力替代，</text>
+  <text x="874" y="474" fill="#fecaca" class="node-body">年资增加但选择减少，最后只能被动换岗。</text>
+  <text x="874" y="498" fill="#ffffff" class="small">风叔的判断不是“后端没前途”，而是“别把自己做成纯执行型后端”。</text>
+
+  <g transform="translate(40, 532)">
+    <line x1="0" y1="-8" x2="36" y2="-8" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="44" y="-4" class="legend">成长主线</text>
+    <line x1="136" y1="-8" x2="172" y2="-8" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+    <text x="180" y="-4" class="legend">资产沉淀</text>
+    <line x1="276" y1="-8" x2="312" y2="-8" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)"/>
+    <text x="320" y="-4" class="legend">风险滑坡</text>
+  </g>
+</svg>
